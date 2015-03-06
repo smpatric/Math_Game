@@ -20,9 +20,11 @@ end
 def questions(player)
   num1 = rand(20)
   num2 = rand(20)
-  puts "#{player.name} what is #{num1} + #{num2}?"
+  operators = [:+, :-, :*]
+  get_operator = operators.sample
+  puts "#{player.name} what is #{num1} #{get_operator} #{num2}?"
   answer = gets.chomp
-  if answer.to_i == num1 + num2
+  if answer.to_i == num1.send(get_operator, num2)
     player.add_points
     puts "Correct! Your score is #{player.score}".colorize(:green)
   else
