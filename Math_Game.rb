@@ -1,8 +1,67 @@
+
+class Player
+  attr_accessor(:name, :score, :lives)
+  def initialize(name)
+    @name = name
+    @score = 0
+    @lives = 0
+  end
+
+  def add_points
+    @score += 1
+  end
+
+  def lose_life
+    @lives -= 0
+  end
+end
+
+def game
+  puts "Player 1, what's your name?: "
+  player_1_name = gets.chomp
+  player_1 = Player.new(player_1_name)
+  puts "Player 2, what's your name?: "
+  player_2_name = gets.chomp
+  player_2 = Player.new(player_2_name) 
+  who_is_playing? = 0
+  while (player_1.lives || player_2.lives) != 0 do
+    num1 = rand(20)
+    num2 = rand(20)
+    if who_is_playing == 0
+      puts "#{player_1.name} what is #{num1} + #{num2}?"
+      answer = gets.chomp
+      if answer == num1 + num2
+        player_1.add_points
+        puts "Correct! Your score is #{player_1.score}"
+        who_is_playing? = 1
+      else
+        player_1.lose_life
+        puts "Nope! You Suck! You have #{player_1.lives} left!"
+        who_is_playing? = 1
+      end
+    else
+      puts "#{player_2.name} what is #{num1} + #{num2}?"
+      answer = gets.chomp
+      if answer == num1 + num2
+        player_2.add_points
+        puts "Correct! Your score is #{player_2.score}"
+        who_is_playing? = 0
+      else
+        player_2.lose_life
+        puts "Nope! You Suck! You have #{player_2.lives} left!"
+        who_is_playing? = 0
+      end
+    end
+end
+
+
+=begin
 @player_1_lives = 3
 @player_2_lives = 3
 @player_1_score = 0
 @player_2_score = 0
 @playing = true
+
 
 def player1_question_generator
   num1 = rand(20)
@@ -60,14 +119,13 @@ def game
       puts "early break!"
       break
     end
-
     player2_question_generator
-    stats_check
-    
+    stats_check   
   end
 end
 
 game
+=end
 
 
 
