@@ -73,16 +73,3 @@ def game
 end
 
 game
-
-
-
-
-
-        
-
-
-
-
-
-
-
