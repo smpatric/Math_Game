@@ -28,14 +28,17 @@ def questions(player)
     player.add_points
     puts "Correct! Your score is #{player.score}".colorize(:green)
   else
-    player.lose_life
-    puts "Nope! You Suck! You have #{player.lives} lives left!".colorize(:red)
+    begin
+      raise "Nope! You Suck! You have #{player.lives} lives left!".colorize(:red)
+    rescue
+      player.lose_life
+    end  
   end
 end
 
 def game_logic
   who_is_playing = 0 
-  while (@player_1.lives > 0  && @player_2.lives > 0 )
+  while (@player_1.lives > 0 && @player_2.lives > 0)
     if who_is_playing == 0
       questions(@player_1)
       who_is_playing = 1
@@ -46,7 +49,11 @@ def game_logic
   end
   puts "Game Over!"
   if @player_2.lives.to_i == 0
-    puts "#{@player_1.name} wins! The score is #{@player_1.name}: #{@player_1.score} to #{@player_2.name}: #{@player_2.score}!"
+    begin
+      raise "#{@player_1.name} wins! The score is #{@player_1.name}: #{@player_1.score} to #{@player_2.name}: #{@player_2.score}!"
+    rescue
+      next
+    end  
   else
     puts "#{@player_2.name} wins! The score is #{@player_2.name}: #{@player_2.score} to #{@player_1.name}: #{@player_1.score}!"
   end
